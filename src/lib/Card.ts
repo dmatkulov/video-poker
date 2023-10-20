@@ -1,6 +1,6 @@
 class Card {
   constructor(
-    public rank: number | string,
+    public rank: string,
     public suit: string,
   ) {
   }

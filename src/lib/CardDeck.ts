@@ -3,7 +3,7 @@ import Card from './Card';
 class CardDeck {
   constructor(
     public card: Card[] = [],
-    public ranks: (number | string)[] = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K', 'A'],
+    public ranks: string[] = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'],
     public suits: string[] = ['diams', 'hearts', 'clubs', 'spades'],
   ) {
     suits.forEach(suit => {
