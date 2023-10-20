@@ -1,8 +1,8 @@
-import './App.css';
 import PlayingCard from './PlayingCard/PlayingCard';
+import {useState} from 'react';
 import Card from './lib/Card';
 import CardDeck from './lib/CardDeck';
-import {useState} from 'react';
+import './App.css';
 
 function App() {
   const [cards, setCards] = useState<Card[]>([]);

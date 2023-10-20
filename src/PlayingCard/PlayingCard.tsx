@@ -6,11 +6,11 @@ interface Props {
 }
 
 const PlayingCard: React.FC<Props> = ({rank, suit}) => {
-  const symbol: {[key: string]: string} = {
-      diams: '♦',
-      hearts: '♥',
-      clubs: '♣',
-      spades: '♠'
+  const symbol: { [key: string]: string } = {
+    diams: '♦',
+    hearts: '♥',
+    clubs: '♣',
+    spades: '♠'
   };
 
   return (
