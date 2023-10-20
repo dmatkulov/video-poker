@@ -6,10 +6,17 @@ interface Props {
 }
 
 const PlayingCard: React.FC<Props> = ({rank, suit}) => {
+  const symbol: {[key: string]: string} = {
+      diams: '♦',
+      hearts: '♥',
+      clubs: '♣',
+      spades: '♠'
+  };
+
   return (
     <span className={`card rank-${rank} ${suit}`}>
       <span className="rank">{rank}</span>
-      <span className="suit">{suit}</span>
+      <span className="suit">{symbol[suit]}</span>
     </span>
   );
 };
