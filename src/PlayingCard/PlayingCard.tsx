@@ -14,7 +14,7 @@ const PlayingCard: React.FC<Props> = ({rank, suit}) => {
   };
 
   return (
-    <span className={`card rank-${rank} ${suit}`}>
+    <span className={`card rank-${rank.toLowerCase()} ${suit}`}>
       <span className="rank">{rank}</span>
       <span className="suit">{symbol[suit]}</span>
     </span>
