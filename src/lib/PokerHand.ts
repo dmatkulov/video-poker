@@ -5,23 +5,40 @@ class PokerHand {
     public cards: Card[],
   ) {}
   getOutCome(): string {
-    const message: string = 'Старшая карта';
-    // const pair: string[] = [];
+    const duplicates: string[] = [];
 
     this.cards.forEach(card => {
-      console.log(card.rank);
+      duplicates.push(card.rank);
     });
 
-    for (let i = 0; i < this.cards.length; i++) {
-      for (let j = i + 1; j < this.cards.length; j++) {
-        if (this.cards[i].rank === this.cards[j].rank) {
-          console.log(this.cards[i].rank, this.cards[j].rank);
-          return 'Одна пара';
+    const counts = duplicates.reduce((map: {[key: string]: number} , val) => {
+      map[val] = (map[val] || 0) + 1;
+      return map;
+    }, {} );
+
+    let twoPairs: boolean = false;
+
+    for (const count in counts) {
+      if (counts[count]) {
+        if (counts[count] === 3) {
+          return 'Тройка';
+        }
+        if (counts[count] === 2) {
+          if (twoPairs) {
+            return 'Две пары';
+          }
+          twoPairs = true;
+        } else if (counts[count] === 3) {
+          return 'Тройка';
         }
       }
     }
 
-    return message;
+    if (twoPairs) {
+      return 'Одна пара';
+    }
+
+    return 'Старшая карта';
   }
 }
 export default PokerHand;
