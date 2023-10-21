@@ -4,9 +4,10 @@ import Card from './lib/Card';
 import CardDeck from './lib/CardDeck';
 import './App.css';
 
+const newCardDeck = new CardDeck();
 function App() {
-  const newCardDeck = new CardDeck();
   const [cards, setCards] = useState<Card[]>([]);
+
   const dealCards = () => {
     const newCards = newCardDeck.getCards(5);
     setCards(newCards);
