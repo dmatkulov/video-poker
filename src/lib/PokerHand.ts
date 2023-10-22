@@ -7,8 +7,8 @@ class PokerHand {
   }
 
   getOutCome(): string {
-    const ranks: { [key: string]: number } = {};
-    const suits: { [key: string]: number } = {};
+    const totalRank: string[] = [];
+    const totalSuit: string[] = [];
 
     let flush: boolean = false;
     let fourOfKind: boolean = false;
@@ -18,9 +18,19 @@ class PokerHand {
     const values: string[] = [];
 
     this.cards.forEach(card => {
-      ranks[card.rank] = (ranks[card.rank] ? ranks[card.rank] + 1 : 1);
-      suits[card.suit] = (suits[card.suit] ? suits[card.suit] + 1 : 1);
+      totalRank.push(card.rank);
+      totalSuit.push(card.suit);
     });
+
+    const countTotal = (arr: string[]) => {
+      return arr.reduce((acc: { [key: string]: number }, val: string) => {
+        acc[val] = (acc[val] ? + 1 : 1);
+        return acc;
+      }, {});
+    };
+
+    const ranks: { [key: string]: number } = countTotal(totalRank);
+    const suits: { [key: string]: number } = countTotal(totalSuit);
 
     for (const rank in ranks) {
       if (ranks[rank] === 4) {
