@@ -3,42 +3,72 @@ import Card from './Card';
 class PokerHand {
   constructor(
     public cards: Card[],
-  ) {}
+  ) {
+  }
+
   getOutCome(): string {
-    const duplicates: string[] = [];
+    const totalRank: string[] = [];
+    const totalSuit: string[] = [];
+
+    let flush: boolean = false;
+    let fourOfKind: boolean = false;
+    let threeOfKind: boolean = false;
+    let twoPairs: boolean = false;
+    let onePair: boolean = false;
 
     this.cards.forEach(card => {
-      duplicates.push(card.rank);
+      totalRank.push(card.rank);
+      totalSuit.push(card.suit);
     });
 
-    const counts = duplicates.reduce((map: {[key: string]: number} , val) => {
-      map[val] = (map[val] || 0) + 1;
-      return map;
-    }, {} );
-
-    let twoPairs: boolean = false;
-
-    for (const count in counts) {
-      if (counts[count]) {
-        if (counts[count] === 3) {
-          return 'Тройка';
+    const countTotal = (arr: string[]) => {
+      return arr.reduce((map: { [key: string]: number }, val: string) => {
+        if (!map[val]) {
+          map[val] = 1;
+        } else {
+          map[val]++;
         }
-        if (counts[count] === 2) {
-          if (twoPairs) {
-            return 'Две пары';
-          }
+        return map;
+      }, {});
+    };
+
+    const ranks: {[key: string]: number} = countTotal(totalRank);
+    const suits: {[key: string]: number} = countTotal(totalSuit);
+
+    for (const rank in ranks) {
+      if (ranks[rank] === 4) {
+        fourOfKind = true;
+      } else if (ranks[rank] === 3) {
+        threeOfKind = true;
+      } else if (ranks[rank] === 2) {
+        if (onePair) {
           twoPairs = true;
-        } else if (counts[count] === 3) {
-          return 'Тройка';
+        } else {
+          onePair = true;
         }
       }
     }
 
-    if (twoPairs) {
-      return 'Одна пара';
+    for (const suit in suits) {
+      if (suits[suit] === 5) {
+        flush = true;
+      }
     }
 
-    return 'Старшая карта';
+    if (flush) {
+      return 'Флэш';
+    } else if (fourOfKind) {
+      return 'Покер';
+    } else if (threeOfKind) {
+      return 'Тройка';
+    } else if (twoPairs) {
+      return 'Две пары';
+    } else if (onePair) {
+      return `Пара`;
+    } else {
+      return 'Старшая карта';
+    }
   }
 }
+
 export default PokerHand;
