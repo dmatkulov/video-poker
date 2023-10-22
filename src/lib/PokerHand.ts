@@ -15,6 +15,7 @@ class PokerHand {
     let threeOfKind: boolean = false;
     let twoPairs: boolean = false;
     let onePair: boolean = false;
+    const values: string[] = [];
 
     this.cards.forEach(card => {
       totalRank.push(card.rank);
@@ -37,13 +38,17 @@ class PokerHand {
 
     for (const rank in ranks) {
       if (ranks[rank] === 4) {
+        values.push(rank);
         fourOfKind = true;
       } else if (ranks[rank] === 3) {
+        values.push(rank);
         threeOfKind = true;
       } else if (ranks[rank] === 2) {
         if (onePair) {
+          values.push(rank);
           twoPairs = true;
         } else {
+          values.push(rank);
           onePair = true;
         }
       }
@@ -51,20 +56,21 @@ class PokerHand {
 
     for (const suit in suits) {
       if (suits[suit] === 5) {
+        values.push(suit);
         flush = true;
       }
     }
 
     if (flush) {
-      return 'Флэш';
+      return `Флэш (${values.join(', ')})`;
     } else if (fourOfKind) {
-      return 'Покер';
+      return `Покер (${values.join(', ')})`;
     } else if (threeOfKind) {
-      return 'Тройка';
+      return `Тройка (${values.join(', ')})`;
     } else if (twoPairs) {
-      return 'Две пары';
+      return `Две пары (${values.join(', ')})`;
     } else if (onePair) {
-      return `Пара`;
+      return `Пара (${values.join(', ')})`;
     } else {
       return 'Старшая карта';
     }
