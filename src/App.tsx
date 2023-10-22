@@ -33,7 +33,7 @@ function App() {
   } else {
     return (
       <div>
-        <p>Раздайте карты чтобы начать игру</p>
+        <p>Раздайте карты, чтобы начать игру</p>
         <button onClick={dealCards}>Раздать карты</button>
       </div>
     );
