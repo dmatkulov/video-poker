@@ -24,7 +24,11 @@ class PokerHand {
 
     const countTotal = (arr: string[]) => {
       return arr.reduce((acc: { [key: string]: number }, val: string) => {
-        acc[val] = (acc[val] ? + 1 : 1);
+        if (!acc[val]) {
+          acc[val] = 1;
+        } else {
+          acc[val]++;
+        }
         return acc;
       }, {});
     };
