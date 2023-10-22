@@ -18,8 +18,8 @@ class PokerHand {
     const values: string[] = [];
 
     this.cards.forEach(card => {
-      ranks[card.rank] = (ranks[card.rank] || 0) + 1;
-      suits[card.suit] = (suits[card.suit] || 0) + 1;
+      ranks[card.rank] = (ranks[card.rank] ? ranks[card.rank] + 1 : 1);
+      suits[card.suit] = (suits[card.suit] ? suits[card.suit] + 1 : 1);
     });
 
     for (const rank in ranks) {
