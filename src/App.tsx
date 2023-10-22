@@ -7,14 +7,15 @@ import PokerHand from './lib/PokerHand';
 
 const newCardDeck = new CardDeck();
 let message: string;
+
 function App() {
   const [cards, setCards] = useState<Card[]>([]);
 
-  const dealCards = () => {
+  const dealCards = (): string => {
     const newCards = newCardDeck.getCards(5);
     setCards(newCards);
     const combination = new PokerHand(newCards);
-    message = combination.getOutCome();
+    return message = combination.getOutCome();
   };
 
   if (cards.length > 0) {
@@ -26,12 +27,15 @@ function App() {
             <PlayingCard key={key} rank={card.rank} suit={card.suit}/>
           ))}
         </div>
-        <button onClick={dealCards}>Раздать карты</button>
+        <button className="btn" onClick={dealCards}>Раздать карты</button>
       </div>
     );
   } else {
     return (
-      <button onClick={dealCards}>Раздать карты</button>
+      <div>
+        <p>Раздайте карты чтобы начать игру</p>
+        <button onClick={dealCards}>Раздать карты</button>
+      </div>
     );
   }
 }
