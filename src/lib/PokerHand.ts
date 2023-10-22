@@ -33,8 +33,8 @@ class PokerHand {
       }, {});
     };
 
-    const ranks: {[key: string]: number} = countTotal(totalRank);
-    const suits: {[key: string]: number} = countTotal(totalSuit);
+    const ranks: { [key: string]: number } = countTotal(totalRank);
+    const suits: { [key: string]: number } = countTotal(totalSuit);
 
     for (const rank in ranks) {
       if (ranks[rank] === 4) {
