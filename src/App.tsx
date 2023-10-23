@@ -8,7 +8,7 @@ import PokerHand from './lib/PokerHand';
 const newCardDeck = new CardDeck();
 let message: string;
 
-function App() {
+const App = () => {
   const [cards, setCards] = useState<Card[]>([]);
 
   const dealCards = (): string => {
@@ -38,6 +38,6 @@ function App() {
       </div>
     );
   }
-}
+};
 
 export default App;
